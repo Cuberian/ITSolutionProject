@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0cfb8a55-835a-45c8-939d-eb8e6c0943cc" name="Default Changelist" comment="" />
+    <list default="true" id="0cfb8a55-835a-45c8-939d-eb8e6c0943cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +14,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Igor &lt;themess@inbox.ru&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -157,17 +164,37 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603132723560</updated>
-      <workItem from="1603132726307" duration="223000" />
+      <workItem from="1603132726307" duration="383000" />
     </task>
+    <task id="LOCAL-00001" summary="test commit">
+      <created>1603133269852</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603133269852</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="test commit" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="314" y="0" key="CommitChangelistDialog2" timestamp="1603133269633">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="314" y="0" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1603133269633" />
     <state x="308" y="192" key="IDE.errors.dialog" timestamp="1603132808833">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="308" y="192" key="IDE.errors.dialog/0.0.1440.900@0.0.1440.900" timestamp="1603132808833" />
+    <state x="320" y="186" key="Vcs.Push.Dialog.v2" timestamp="1603133284154">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="186" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1603133284154" />
   </component>
 </project>
