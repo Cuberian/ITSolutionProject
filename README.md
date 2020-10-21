@@ -1,6 +1,6 @@
 
 ## Команда
-#####Ссылки на GitHub:
+Ссылки на GitHub:
 - [Крупкин Игорь](https://github.com/Cuberian)
 - [Лесив Анастасия](https://github.com/Augen-Auf)
 - [Долгушин Михаил](https://github.com/mihatronych) 
