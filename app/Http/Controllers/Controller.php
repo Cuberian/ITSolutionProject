@@ -11,9 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function fistingAss($fingers) {
-        $ass = $fingers;
-        return 'fucking cuming';
-    }
 }
 
