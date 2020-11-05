@@ -15,6 +15,7 @@ class CreateUsersPostsVkTable extends Migration
     {
         Schema::create('users_posts_vk', function (Blueprint $table) {
             $table->id('vk_ath_id');
+            $table->bigInteger('vk_us_id')->unsigned();
             $table->foreign('vk_us_id')->references('VK_id')->on('users_vk')->onDelete('cascade');
             $table->timestamps();
         });
