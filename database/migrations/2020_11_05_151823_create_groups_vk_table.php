@@ -14,9 +14,9 @@ class CreateGroupsVkTable extends Migration
     public function up()
     {
         Schema::create('groups_vk', function (Blueprint $table) {
-            $table->id('VK_id');
-            $table->bigInteger('VK_wall_id')->unsigned();
-            $table->unique('VK_wall_id');
+            $table->id('vk_id');
+            $table->bigInteger('vk_wall_id')->unsigned();
+            $table->unique('vk_wall_id');
             $table->string('group_info');
             $table->string('group_avatar');
             $table->boolean('group_privacy');
