@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTestToTestTable extends Migration
+class CreatePostsVkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTestToTestTable extends Migration
      */
     public function up()
     {
-        Schema::create('test_to_test', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('test_id')->unsigned();
-            $table->foreign('test_id')->references('id')->on('test')->onDelete('cascade');
+        Schema::create('posts_vk', function (Blueprint $table) {
+            $table->id('vk_post_id');
+            $table->string('vk_post_text');
+            $table->string('vk_post_pic');
+            $table->float('post_toxicity');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTestToTestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_to_test');
+        Schema::dropIfExists('posts_vk');
     }
 }
