@@ -15,6 +15,8 @@ class CreateCommentsVkTable extends Migration
     {
         Schema::create('comments_vk', function (Blueprint $table) {
             $table->id('vk_comment_id');
+            $table->string('user_type');
+            $table->bigInteger('vk_id');
             $table->string('vk_comm_text');
             $table->string('vk_comm_pic');
             $table->float('comm_toxicity');

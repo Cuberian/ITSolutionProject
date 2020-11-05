@@ -15,6 +15,8 @@ class CreatePostsVkTable extends Migration
     {
         Schema::create('posts_vk', function (Blueprint $table) {
             $table->id('vk_post_id');
+            $table->foreign('vk_wall_id')->references('VK_wall_id')->on('groups_vk')->onDelete('cascade');
+            $table->foreign('vk_id')->references('VK_id')->on('groups_vk')->onDelete('cascade');
             $table->string('vk_post_text');
             $table->string('vk_post_pic');
             $table->float('post_toxicity');
