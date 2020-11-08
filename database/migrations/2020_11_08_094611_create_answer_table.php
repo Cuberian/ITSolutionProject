@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersVkTable extends Migration
+class CreateAnswerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateUsersVkTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_vk', function (Blueprint $table) {
+        Schema::create('answer', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('wall_id')->unsigned();
-            $table->string('fullname');
-            $table->string('avatar');
-            $table->boolean('privacy');
-            $table->float('toxicity');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateUsersVkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_vk');
+        Schema::dropIfExists('answer');
     }
 }

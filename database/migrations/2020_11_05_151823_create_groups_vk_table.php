@@ -14,15 +14,13 @@ class CreateGroupsVkTable extends Migration
     public function up()
     {
         Schema::create('groups_vk', function (Blueprint $table) {
-            $table->id('vk_id');
-            $table->bigInteger('vk_wall_id')->unsigned();
-            $table->unique('vk_wall_id');
-            $table->string('group_info');
-            $table->string('group_avatar');
-            $table->boolean('group_privacy');
-            $table->integer('group_subscribers_count');
-            $table->integer('group_posts_count');
-            $table->float('group_toxicity');
+            $table->id('id');
+            $table->bigInteger('wall_id')->unsigned();
+            $table->unique('wall_id');
+            $table->string('info');
+            $table->string('avatar');
+            $table->boolean('privacy');
+            $table->float('toxicity');
             $table->timestamps();
         });
     }
