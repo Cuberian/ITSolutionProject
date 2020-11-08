@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             PostsSeeder::class,
             GroupsSeeder::class,
             SubscribersSeeder::class,
-            FriendsConnectionSeeder::class
+            FriendsConnectionSeeder::class,
+            AnswersSeeder::class
         ]);
     }
 }
