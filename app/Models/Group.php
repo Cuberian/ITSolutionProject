@@ -4,10 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Comment;
+use App\Models\Post;
 
 class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups_vk';
     protected $fillable = ['wall_id', 'info', 'privacy', 'avatar', 'toxicity'];
+
+    public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Comment::class, 'author');
+    }
+    public function posts(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Post::class, 'author');
+    }
 }
