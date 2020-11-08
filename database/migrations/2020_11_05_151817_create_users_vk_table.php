@@ -14,15 +14,11 @@ class CreateUsersVkTable extends Migration
     public function up()
     {
         Schema::create('users_vk', function (Blueprint $table) {
-            $table->id('vk_id');
-            $table->bigInteger('vk_wall_id')->unsigned();
+            $table->id();
+            $table->bigInteger('wall_id')->unsigned();
             $table->string('fullname');
             $table->string('avatar');
             $table->boolean('privacy');
-            $table->integer('posts_count');
-            $table->integer('friends_count');
-            $table->integer('subscribers_count');
-            $table->integer('groups_count');
             $table->float('toxicity');
             $table->timestamps();
         });

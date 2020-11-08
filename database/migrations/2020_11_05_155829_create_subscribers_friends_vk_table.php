@@ -15,14 +15,14 @@ class CreateSubscribersFriendsVkTable extends Migration
     {
         Schema::create('subscribers_friends_vk', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('vk_user_id')->unsigned();
-            $table->foreign('vk_user_id')
-                ->references('vk_id')
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')
                 ->on('users_vk')
                 ->onDelete('cascade');
-            $table->bigInteger('vk_friend_id')->unsigned();
-            $table->foreign('vk_friend_id')
-                ->references('vk_id')
+            $table->bigInteger('friend_id')->unsigned();
+            $table->foreign('friend_id')
+                ->references('id')
                 ->on('users_vk')
                 ->onDelete('cascade');
             $table->boolean('is_friend');
