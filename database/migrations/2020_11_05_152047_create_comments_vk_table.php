@@ -15,10 +15,12 @@ class CreateCommentsVkTable extends Migration
     {
         Schema::create('comments_vk', function (Blueprint $table) {
             $table->id();
-            $table->string('user_type');
-            $table->bigInteger('vk_id');
+            $table->string('author_type');
+            $table->bigInteger('author_id');
+            $table->bigInteger('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts_vk')->onDelete('cascade');
             $table->string('text');
-            $table->string('pic');
+            $table->string('picture');
             $table->float('toxicity');
             $table->timestamps();
         });

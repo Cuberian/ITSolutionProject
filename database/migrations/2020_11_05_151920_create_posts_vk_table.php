@@ -17,10 +17,10 @@ class CreatePostsVkTable extends Migration
             $table->id();
             $table->bigInteger('wall_id')->unsigned();
             $table->foreign('wall_id')->references('wall_id')->on('groups_vk')->onDelete('cascade');
-            $table->bigInteger('id')->unsigned();
-            $table->foreign('id')->references('id')->on('groups_vk')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('groups_vk')->onDelete('cascade');
             $table->string('text');
-            $table->string('pic');
+            $table->string('picture');
             $table->float('toxicity');
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscribersFriendsVkTable extends Migration
+class CreateFriendsConnectionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSubscribersFriendsVkTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscribers_friends_vk', function (Blueprint $table) {
+        Schema::create('friends_connection', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
@@ -37,6 +37,6 @@ class CreateSubscribersFriendsVkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscribers_friends_vk');
+        Schema::dropIfExists('friends_connection');
     }
 }
