@@ -14,12 +14,12 @@ class CreateCommentsVkTable extends Migration
     public function up()
     {
         Schema::create('comments_vk', function (Blueprint $table) {
-            $table->id('vk_comment_id');
+            $table->id();
             $table->string('user_type');
             $table->bigInteger('vk_id');
-            $table->string('vk_comm_text');
-            $table->string('vk_comm_pic');
-            $table->float('comm_toxicity');
+            $table->string('text');
+            $table->string('pic');
+            $table->float('toxicity');
             $table->timestamps();
         });
     }

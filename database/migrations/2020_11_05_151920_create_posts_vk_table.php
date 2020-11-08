@@ -14,14 +14,14 @@ class CreatePostsVkTable extends Migration
     public function up()
     {
         Schema::create('posts_vk', function (Blueprint $table) {
-            $table->id('vk_post_id');
-            $table->bigInteger('vk_wall_id')->unsigned();
-            $table->foreign('vk_wall_id')->references('vk_wall_id')->on('groups_vk')->onDelete('cascade');
-            $table->bigInteger('vk_id')->unsigned();
-            $table->foreign('vk_id')->references('vk_id')->on('groups_vk')->onDelete('cascade');
-            $table->string('vk_post_text');
-            $table->string('vk_post_pic');
-            $table->float('post_toxicity');
+            $table->id();
+            $table->bigInteger('wall_id')->unsigned();
+            $table->foreign('wall_id')->references('wall_id')->on('groups_vk')->onDelete('cascade');
+            $table->bigInteger('id')->unsigned();
+            $table->foreign('id')->references('id')->on('groups_vk')->onDelete('cascade');
+            $table->string('text');
+            $table->string('pic');
+            $table->float('toxicity');
             $table->timestamps();
         });
     }
