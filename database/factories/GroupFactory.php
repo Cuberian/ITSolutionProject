@@ -22,7 +22,7 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            'wall_id' => $this->faker->randomDigit,
+            'wall_id' => $this->faker->unique()->randomNumber(),
             'info' => $this->faker->text(),
             'avatar' => $this->faker->imageUrl(200,200),
             'privacy' => $this->faker->boolean(),

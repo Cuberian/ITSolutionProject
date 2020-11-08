@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 
 class GroupsSeeder extends Seeder
@@ -13,6 +14,6 @@ class GroupsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Group::factory()->times(5)->create();
     }
 }

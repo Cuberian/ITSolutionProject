@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\UserVK;
@@ -22,10 +23,18 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $user_vk = UserVK::factory()->create();
+        $author_type = $this->faker->randomElement([UserVK::class, Group::class]);
+        if($author_type  ===  UserVK::class) {
+            $author = UserVK::factory()->create();
+
+        }
+        else {
+            $author = Group::factory()->create();
+        }
         return [
-            'user_id'=>$user_vk->id,
-            'wall_id'=>$user_vk->wall_id,
+            'author_type' => $author_type,
+            'author_id'=>$author->id,
+            'wall_id'=>$author->wall_id,
             'text' => $this->faker->text(200),
             'picture' => $this->faker->imageUrl(400, 400),
             'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1),

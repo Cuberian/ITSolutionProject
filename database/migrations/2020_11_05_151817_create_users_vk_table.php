@@ -16,6 +16,7 @@ class CreateUsersVkTable extends Migration
         Schema::create('users_vk', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('wall_id')->unsigned();
+            $table->unique('wall_id');
             $table->string('fullname');
             $table->string('avatar');
             $table->boolean('privacy');

@@ -22,7 +22,7 @@ class UserVKFactory extends Factory
     public function definition()
     {
         return [
-            'wall_id' => $this->faker->randomDigit,
+            'wall_id' => $this->faker->unique()->randomNumber(),
             'fullname' => $this->faker->name,
             'avatar' => $this->faker->imageUrl(200,200),
             'privacy' => $this->faker->boolean,

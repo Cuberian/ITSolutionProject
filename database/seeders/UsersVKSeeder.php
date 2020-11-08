@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserVK;
 use Illuminate\Database\Seeder;
 
 class UsersVKSeeder extends Seeder
@@ -13,6 +14,6 @@ class UsersVKSeeder extends Seeder
      */
     public function run()
     {
-        //
+        UserVK::factory()->times(5)->create();
     }
 }
