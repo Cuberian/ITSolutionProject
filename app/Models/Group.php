@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+    protected $fillable = ['wall_id', 'info', 'privacy', 'avatar', 'toxicity'];
 }
