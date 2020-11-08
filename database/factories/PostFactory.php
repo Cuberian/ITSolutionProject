@@ -37,7 +37,7 @@ class PostFactory extends Factory
             'wall_id'=>$author->wall_id,
             'text' => $this->faker->text(200),
             'picture' => $this->faker->imageUrl(400, 400),
-            'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1),
+            'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1)
         ];
     }
 }

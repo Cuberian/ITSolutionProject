@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             UsersVKSeeder::class,
             CommentsSeeder::class,
             PostsSeeder::class,
-            GroupsSeeder::class
+            GroupsSeeder::class,
+            FriendsConnectionSeeder::class
         ]);
     }
 }
