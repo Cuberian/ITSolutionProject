@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Group;
+use App\Models\Subscriber;
+use App\Models\UserVK;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class SubscriberFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Subscriber::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +24,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'username' => $this->faker->name,
-            'avatar' => $this->faker->imageUrl(200, 200),
-            'email' => $this->faker->unique()->safeEmail
+            'user_id' => UserVK::factory()->create()->id,
+            'group_id' => Group::factory()->create()->id,
+            'is_admin' => $this->faker->boolean
         ];
     }
 }

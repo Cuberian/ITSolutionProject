@@ -36,7 +36,7 @@ class CommentFactory extends Factory
             'post_id'=>Post::factory()->create()->id,
             'text' => $this->faker->text(100),
             'picture' => $this->faker->imageUrl(200, 200),
-            'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1),
+            'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1)
         ];
     }
 }

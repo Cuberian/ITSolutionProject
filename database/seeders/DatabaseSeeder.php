@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             CommentsSeeder::class,
             PostsSeeder::class,
             GroupsSeeder::class,
-            SubscribersSeeder::class
+            SubscribersSeeder::class,
+            FriendsConnectionSeeder::class
         ]);
     }
 }
