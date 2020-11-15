@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'as' => 'toxicity.'], function () {
+    Route::resource('users', UsersController::class)->except(['edit']);
+    Route::resource('comments', CommentsController::class)->except(['edit']);
+    Route::resource('posts', PostsController::class)->except(['edit']);
+    Route::resource('users_vk', UsersVKController::class)->except(['edit']);
+    Route::resource('groups', GroupsController::class)->except(['edit']);
 });
+
