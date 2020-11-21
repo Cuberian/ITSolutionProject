@@ -14,7 +14,6 @@ class CreateSubscribersTable extends Migration
     public function up()
     {
         Schema::create('subscribers', function (Blueprint $table) {
-            $table->id();
             $table->bigInteger('group_id')->unsigned();
             $table->foreign('group_id')
                 ->references('id')
