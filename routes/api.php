@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'middleware' => 'auth:api','as' => 'toxicity.'], function () {
+    Route::resource('users', UsersController::class)->except(['edit']);
+    Route::resource('comments', CommentsController::class)->except(['edit']);
+    Route::resource('posts', PostsController::class)->except(['edit']);
+    Route::resource('users_vk', UsersVKController::class)->except(['edit']);
+    Route::resource('groups', GroupsController::class)->except(['edit']);
 });
