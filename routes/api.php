@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UsersVKController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
