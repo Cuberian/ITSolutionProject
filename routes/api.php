@@ -19,10 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'middleware' => 'auth:api','as' => 'toxicity.'], function () {
+Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'middleware' => 'auth.jwt','as' => 'toxicity.'], function () {
     Route::resource('users', UsersController::class)->except(['edit']);
     Route::resource('comments', CommentsController::class)->except(['edit']);
     Route::resource('posts', PostsController::class)->except(['edit']);
     Route::resource('users_vk', UsersVKController::class)->except(['edit']);
     Route::resource('groups', GroupsController::class)->except(['edit']);
+});
+Route::post("login", "AuthController@login");
+Route::post("register", "AuthController@register");
+
+Route::group(["middleware" => "auth.jwt"], function() {
+    route::get("logout", "AuthController@logout");
 });
