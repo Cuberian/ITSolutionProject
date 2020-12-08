@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use GuzzleHttp;
 class GroupsController extends Controller
 {
+    public static $host = 'project';
     /**
      * Display a listing of the resource.
      *
@@ -40,12 +41,15 @@ class GroupsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $group_id
+     * @return \Psr\Http\Message\StreamInterface
+     * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function show($id)
+    public function show($group_id)
     {
-        //
+        $group = new GuzzleHttp\Client();
+        $res = $group->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $group_id);
+        return $res->getBody();
     }
 
     /**
@@ -80,5 +84,19 @@ class GroupsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_posts($group_id)
+    {
+        $post = new GuzzleHttp\Client();
+        $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/posts/' . $group_id);
+        return $res->getBody();
+    }
+
+    public function get_members($group_id)
+    {
+        $members = new GuzzleHttp\Client();
+        $res = $members->request('GET', 'http://'. self::$host . '/toxicity_py/api/members/' . $group_id);
+        return $res->getBody();
     }
 }
