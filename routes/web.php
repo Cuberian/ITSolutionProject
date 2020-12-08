@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'as' => 'toxicity.'], function () {
+Route::group(['prefix' => 'toxicity', 'as' => 'toxicity.'], function () {
     Route::resource('users', UsersController::class)->except(['edit']);
     Route::resource('comments', CommentsController::class)->except(['edit']);
     Route::resource('posts', PostsController::class)->except(['edit']);
