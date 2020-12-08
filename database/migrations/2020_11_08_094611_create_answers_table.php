@@ -14,7 +14,6 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
-            $table->id();
             $table->bigInteger('comment_id')->unsigned();
             $table->foreign('comment_id')
                 ->references('id')
