@@ -5,6 +5,7 @@ use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersVKController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,16 +20,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'toxicity', 'namespace' => 'App', 'middleware' => 'auth.jwt','as' => 'toxicity.'], function () {
+Route::group(['prefix' => 'toxicity', 'middleware' => 'auth.jwt','as' => 'toxicity.'], function () {
     Route::resource('users', UsersController::class)->except(['edit']);
     Route::resource('comments', CommentsController::class)->except(['edit']);
     Route::resource('posts', PostsController::class)->except(['edit']);
     Route::resource('users_vk', UsersVKController::class)->except(['edit']);
     Route::resource('groups', GroupsController::class)->except(['edit']);
 });
-Route::post("login", "AuthController@login");
-Route::post("register", "AuthController@register");
+
+Route::post("login", [AuthController::class, 'login']);
+Route::post("register", [AuthController::class, 'register']);
 
 Route::group(["middleware" => "auth.jwt"], function() {
-    route::get("logout", "AuthController@logout");
+    route::get("logout", "App\Http\Controllers\AuthController@logout");
 });

@@ -23,6 +23,7 @@ class SubscriberFactory extends Factory
      */
     public function definition()
     {
+        dump(UserVK::factory()->create()->id);
         return [
             'user_id' => UserVK::factory()->create()->id,
             'group_id' => Group::factory()->create()->id,

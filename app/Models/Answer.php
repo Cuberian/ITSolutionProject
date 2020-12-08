@@ -9,5 +9,6 @@ class Answer extends Model
 {
     use HasFactory;
     protected $table = 'answers';
+    public $incrementing = false;
     protected $fillable = ['comment_id', 'answer_id'];
 }

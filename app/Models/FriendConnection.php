@@ -9,5 +9,6 @@ class FriendConnection extends Model
 {
     use HasFactory;
     protected $table = 'friends_connection';
+    public $incrementing = false;
     protected $fillable = ['user_id', 'friend_id', 'is_frien'];
 }
