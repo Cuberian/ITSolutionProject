@@ -3,25 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PostsController extends Controller
 {
     protected $user;
 
-    public function __construct()
-    {
-        $this->user = JWTAuth::parseToken()->authenticate();
+    public function __construct() {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                $this->user = JWTAuth::parseToken()->authenticate();
+            }
+        }
+        catch (JWTException $e) {
+            response()->json(['token_expired']);
+        }
     }
     /**
      * Display a listing of the resource.
      *
-     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return response()->json([Post::all()]);
+        return Post::all()->toArray();
     }
 
     /**
