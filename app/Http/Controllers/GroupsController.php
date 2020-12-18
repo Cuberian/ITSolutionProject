@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class GroupsController extends Controller
 {
-    public static $host = 'project';
+
     protected $user;
 
     public function __construct() {

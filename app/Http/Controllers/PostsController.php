@@ -55,12 +55,14 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $post_id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($post_id)
     {
-        //
+        $post = new GuzzleHttp\Client();
+        $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $post_id);
+        return $res->getBody();
     }
 
     /**

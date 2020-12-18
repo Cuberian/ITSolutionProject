@@ -11,5 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected static $host = '127.0.0.1:5000';
 }
 

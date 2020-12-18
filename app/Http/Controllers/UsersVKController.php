@@ -9,7 +9,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 class UsersVKController extends Controller
 {
-    public static $host = 'project';
     protected $user;
 
     public function __construct() {

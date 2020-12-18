@@ -26,6 +26,9 @@ Route::group(['prefix' => 'toxicity', 'middleware' => 'auth.jwt','as' => 'toxici
     Route::resource('posts', PostsController::class)->except(['edit']);
     Route::resource('users_vk', UsersVKController::class)->except(['edit']);
     Route::resource('groups', GroupsController::class)->except(['edit']);
+
+    Route::get('comments/{post_id}/{user_id}', [CommentsController::class, 'get_comment']);
+    Route::get('answers/{comment_id}/{user_id}', [CommentsController::class, 'get_answer']);
 });
 
 Route::post("login", [AuthController::class, 'login']);
