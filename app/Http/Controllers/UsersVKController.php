@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserVK;
 use Illuminate\Http\Request;
 use GuzzleHttp;
-
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 class UsersVKController extends Controller
 {
     public static $host = 'project';
+    protected $user;
+
+    public function __construct() {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                $this->user = JWTAuth::parseToken()->authenticate();
+            }
+        }
+        catch (JWTException $e) {
+            response()->json(['token_expired']);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +29,7 @@ class UsersVKController extends Controller
      */
     public function index()
     {
-        //
+        return UserVK::all()->toArray();
     }
 
     /**
