@@ -3,24 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserVK;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use GuzzleHttp;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 class UsersVKController extends Controller
 {
-    protected $user;
-
-    public function __construct() {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                $this->user = JWTAuth::parseToken()->authenticate();
-            }
-        }
-        catch (JWTException $e) {
-            response()->json(['token_expired']);
-        }
-    }
     /**
      * Display a listing of the resource.
      *
@@ -62,8 +50,12 @@ class UsersVKController extends Controller
 
     public function show($userVK_id)
     {
-        $userVK = new GuzzleHttp\Client();
-        $res = $userVK->request('GET', 'http://' . self::$host . '/toxicity_py/api/users/' . $userVK_id);
+        try {
+            $userVK = new GuzzleHttp\Client();
+            $res = $userVK->request('GET', 'http://' . self::$host . '/toxicity_py/api/users/' . $userVK_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\MessWage::toString($e->getResponse())]);
+        }
         return $res->getBody();
     }
 
@@ -102,39 +94,64 @@ class UsersVKController extends Controller
     }
     public function get_posts($user_id)
     {
-        $post = new GuzzleHttp\Client();
-        $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/posts/' . $user_id);
+        try {
+            $post = new GuzzleHttp\Client();
+            $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/posts/' . $user_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
     public function get_subscribers($user_id)
     {
-        $subscribers = new GuzzleHttp\Client();
-        $res = $subscribers->request('GET', 'http://'. self::$host . '/toxicity_py/api/followers/'
-            . $user_id);
+        try {
+            $subscribers = new GuzzleHttp\Client();
+            $res = $subscribers->request('GET', 'http://'. self::$host . '/toxicity_py/api/followers/'
+                . $user_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 
     public function get_subscriptions($user_id)
     {
-        $subscriptions = new GuzzleHttp\Client();
-        $res = $subscriptions->request('GET', 'http://'. self::$host . '/toxicity_py/api/subscriptions/'
-            . $user_id);
+        try {
+            $subscriptions = new GuzzleHttp\Client();
+            $res = $subscriptions->request('GET', 'http://'. self::$host . '/toxicity_py/api/subscriptions/'
+                . $user_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 
     public function post_message(Request $request)
     {
-        $message = new GuzzleHttp\Client();
-        $res = $message->request('POST', 'http://'. self::$host . '/toxicity_py/api/message',
-            ['message' => $request->input('message')]);
+        try {
+            $message = new GuzzleHttp\Client();
+            $res = $message->request('POST', 'http://'. self::$host . '/toxicity_py/api/message',
+                ['message' => $request->input('message')]);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 
     public function post_messages(Request $request)
     {
-        $messages = new GuzzleHttp\Client();
-        $res = $messages->request('POST', 'http://'. self::$host . '/toxicity_py/api/messages',
-            ['messages' => $request->input('messages')]);
+        try {
+            $messages = new GuzzleHttp\Client();
+            $res = $messages->request('POST', 'http://'. self::$host . '/toxicity_py/api/messages',
+                ['messages' => $request->input('messages')]);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 }

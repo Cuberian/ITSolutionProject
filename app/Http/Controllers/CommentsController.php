@@ -5,24 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use GuzzleHttp;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\ClientException;
 
 class CommentsController extends Controller
 {
-    public static $host = 'project';
-    protected $user;
-
-    public function __construct() {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                $this->user = JWTAuth::parseToken()->authenticate();
-            }
-        }
-        catch (JWTException $e) {
-            response()->json(['token_expired']);
-        }
-    }
     /**
      * Display a listing of the resource.
      *
@@ -103,16 +90,25 @@ class CommentsController extends Controller
     public function get_comment($user_id, $post_id)
     {
         $comment = new GuzzleHttp\Client();
-        $res = $comment->request('GET', 'http://'. self::$host . '/toxicity_py/api/comments/'
-            . $user_id . '/' . $post_id);
+        try {
+            $res = $comment->request('GET', 'http://'. self::$host . '/toxicity_py/api/comments/'
+                . $user_id . '/' . $post_id);
+        } catch (ClientException $e) {
+           return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
         return $res->getBody();
     }
 
     public function get_answer($user_id, $comment_id)
     {
-        $comment = new GuzzleHttp\Client();
-        $res = $comment->request('GET', 'http://'. self::$host . '/toxicity_py/api/answers/'
-            . $user_id . '/' . $comment_id);
+        try {
+            $comment = new GuzzleHttp\Client();
+            $res = $comment->request('GET', 'http://'. self::$host . '/toxicity_py/api/answers/'
+                . $user_id . '/' . $comment_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 }

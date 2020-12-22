@@ -5,23 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use GuzzleHttp;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7;
 
 class PostsController extends Controller
 {
-    protected $user;
-
-    public function __construct() {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                $this->user = JWTAuth::parseToken()->authenticate();
-            }
-        }
-        catch (JWTException $e) {
-            response()->json(['token_expired']);
-        }
-    }
     /**
      * Display a listing of the resource.
      *
@@ -61,8 +49,13 @@ class PostsController extends Controller
      */
     public function show($post_id)
     {
-        $post = new GuzzleHttp\Client();
-        $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $post_id);
+        try {
+            $post = new GuzzleHttp\Client();
+            $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $post_id);
+        } catch (ClientException $e) {
+            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
+        }
+
         return $res->getBody();
     }
 
