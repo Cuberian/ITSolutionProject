@@ -12,6 +12,9 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'auth_host' => env('AUTH_HOST' ),
+
+    'python_host' => env('PYTHON_HOST' ),
 
     'name' => env('APP_NAME', 'Laravel'),
 
@@ -161,6 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Package Service Providers...

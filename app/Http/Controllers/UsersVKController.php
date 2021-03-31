@@ -7,12 +7,14 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use GuzzleHttp;
+use Illuminate\Support\Facades\Config;
+
 class UsersVKController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index()
     {
@@ -52,7 +54,7 @@ class UsersVKController extends Controller
     {
         try {
             $userVK = new GuzzleHttp\Client();
-            $res = $userVK->request('GET', 'http://' . self::$host . '/toxicity_py/api/users/' . $userVK_id);
+            $res = $userVK->request('GET', Config::get('app.python_host') . '/toxicity_py/api/users/' . $userVK_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\MessWage::toString($e->getResponse())]);
         }
@@ -96,7 +98,7 @@ class UsersVKController extends Controller
     {
         try {
             $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/posts/' . $user_id);
+            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/' . $user_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
         }
@@ -107,7 +109,7 @@ class UsersVKController extends Controller
     {
         try {
             $subscribers = new GuzzleHttp\Client();
-            $res = $subscribers->request('GET', 'http://'. self::$host . '/toxicity_py/api/followers/'
+            $res = $subscribers->request('GET', Config::get('app.python_host') . '/toxicity_py/api/followers/'
                 . $user_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
@@ -120,7 +122,7 @@ class UsersVKController extends Controller
     {
         try {
             $subscriptions = new GuzzleHttp\Client();
-            $res = $subscriptions->request('GET', 'http://'. self::$host . '/toxicity_py/api/subscriptions/'
+            $res = $subscriptions->request('GET', Config::get('app.python_host') . '/toxicity_py/api/subscriptions/'
                 . $user_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
@@ -133,7 +135,7 @@ class UsersVKController extends Controller
     {
         try {
             $message = new GuzzleHttp\Client();
-            $res = $message->request('POST', 'http://'. self::$host . '/toxicity_py/api/message',
+            $res = $message->request('POST', Config::get('app.python_host') . '/toxicity_py/api/message',
                 ['message' => $request->input('message')]);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
@@ -146,7 +148,7 @@ class UsersVKController extends Controller
     {
         try {
             $messages = new GuzzleHttp\Client();
-            $res = $messages->request('POST', 'http://'. self::$host . '/toxicity_py/api/messages',
+            $res = $messages->request('POST', Config::get('app.python_host') . '/toxicity_py/api/messages',
                 ['messages' => $request->input('messages')]);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);

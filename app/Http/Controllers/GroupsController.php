@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use GuzzleHttp;
+use Illuminate\Support\Facades\Config;
 
 
 class GroupsController extends Controller
@@ -46,14 +47,14 @@ class GroupsController extends Controller
      * Display the specified resource.
      *
      * @param $group_id
-     * @return \Psr\Http\Message\StreamInterface
+     * @return \Illuminate\Http\JsonResponse
      * @throws GuzzleHttp\Exception\GuzzleException
      */
     public function show($group_id)
     {
         try {
             $group = new GuzzleHttp\Client();
-            $res = $group->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $group_id);
+            $res = $group->request('GET', Config::get('app.python_host') . '/toxicity_py/api/groups/' . $group_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
         }
@@ -99,7 +100,7 @@ class GroupsController extends Controller
     {
         try {
             $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/posts/' . $group_id);
+            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/' . $group_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
         }
@@ -111,7 +112,7 @@ class GroupsController extends Controller
     {
         try {
             $members = new GuzzleHttp\Client();
-            $res = $members->request('GET', 'http://'. self::$host . '/toxicity_py/api/members/' . $group_id);
+            $res = $members->request('GET', Config::get('app.python_host') . '/toxicity_py/api/members/' . $group_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
         }

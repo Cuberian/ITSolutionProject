@@ -7,13 +7,14 @@ use GuzzleHttp;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
+use Illuminate\Support\Facades\Config;
 
 class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index()
     {
@@ -45,13 +46,13 @@ class PostsController extends Controller
      * Display the specified resource.
      *
      * @param $post_id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($post_id)
     {
         try {
             $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', 'http://'. self::$host . '/toxicity_py/api/groups/' . $post_id);
+            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/post/' . $post_id);
         } catch (ClientException $e) {
             return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
         }

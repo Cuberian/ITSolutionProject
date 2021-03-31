@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\PostsController;
@@ -18,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'toxicity', 'middleware' => 'auth.check','as' => 'toxicity.'], function () {
-    Route::resource('users', UsersController::class)->except(['edit']);
+Route::post('/get_jwt', [AuthController::class, 'getJWT']);
+
+Route::group(['prefix' => 'toxicity', 'middleware' => 'auth:api','as' => 'toxicity.'], function () {
     Route::resource('comments', CommentsController::class)->except(['edit']);
     Route::resource('posts', PostsController::class)->except(['edit']);
     Route::resource('users_vk', UsersVKController::class)->except(['edit']);
