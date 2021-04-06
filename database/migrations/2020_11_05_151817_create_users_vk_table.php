@@ -18,7 +18,7 @@ class CreateUsersVkTable extends Migration
             $table->bigInteger('wall_id')->unsigned();
             $table->unique('wall_id');
             $table->string('fullname');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->boolean('privacy');
             $table->float('toxicity');
             $table->timestamps();

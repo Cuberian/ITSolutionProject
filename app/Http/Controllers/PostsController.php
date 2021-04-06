@@ -39,7 +39,15 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->validate([
+            'wall_id' => 'required|numeric',
+            'author_id' => 'required|numeric',
+            'author_type' => 'required|max:50',
+            'text' => 'required|max:255',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return Post::create($storeData);
     }
 
     /**
@@ -80,7 +88,15 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'wall_id' => 'required|numeric',
+            'author_id' => 'required|numeric',
+            'author_type' => 'required|max:50',
+            'text' => 'required|max:255',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return Post::whereId($id)->update($data);
     }
 
     /**
@@ -91,6 +107,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return $post ->delete();
     }
 }

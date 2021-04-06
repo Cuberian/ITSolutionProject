@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserVK;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
@@ -39,7 +40,14 @@ class UsersVKController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->validate([
+            'wall_id' => 'required|numeric',
+            'fullname' => 'required|max:100',
+            'privacy' => 'required',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return UserVK::create($storeData);
     }
 
     /**
@@ -81,7 +89,14 @@ class UsersVKController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'wall_id' => 'required|numeric',
+            'fullname' => 'required|max:100',
+            'privacy' => 'required',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return UserVK::whereId($id)->update($data);
     }
 
     /**
@@ -92,7 +107,8 @@ class UsersVKController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userVK = UserVK::findOrFail($id);
+        return $userVK->delete();
     }
     public function get_posts($user_id)
     {

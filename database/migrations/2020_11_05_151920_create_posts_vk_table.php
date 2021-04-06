@@ -19,7 +19,7 @@ class CreatePostsVkTable extends Migration
             $table->bigInteger('author_id');
             $table->bigInteger('wall_id');
             $table->string('text');
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->float('toxicity');
             $table->timestamps();
         });

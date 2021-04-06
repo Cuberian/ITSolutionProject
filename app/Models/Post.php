@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $table = 'posts_vk';
+    protected $table='posts_vk';
 
-    protected $fillable = ['author_id', 'author_type', 'wall_id', 'text', 'picture', 'toxicity'];
+    protected $guarded = [];
+    //protected $fillable = ['author_id', 'author_type', 'wall_id', 'text', 'toxicity'];
 
     public function author(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {

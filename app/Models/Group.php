@@ -11,7 +11,8 @@ class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups_vk';
-    protected $fillable = ['wall_id', 'info', 'privacy', 'avatar', 'toxicity'];
+    protected $guarded = [];
+    //protected $fillable = ['wall_id', 'info', 'privacy', 'toxicity'];
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/get_jwt', [AuthController::class, 'getJWT']);
+Route::post('/test', [AuthController::class, 'testRequest']);
 
 Route::group(['prefix' => 'toxicity', 'middleware' => 'auth:api','as' => 'toxicity.'], function () {
     Route::resource('comments', CommentsController::class)->except(['edit']);
