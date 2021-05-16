@@ -40,7 +40,14 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->validate([
+            'wall_id' => 'required|numeric',
+            'info'=> 'required|max:255',
+            'privacy' => 'required',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return response(Group::create($storeData));
     }
 
     /**
@@ -82,7 +89,14 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'wall_id' => 'required|numeric',
+            'info'=> 'required|max:255',
+            'privacy' => 'required',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return Group::where('id',$id)->update($data);
     }
 
     /**
@@ -93,7 +107,8 @@ class GroupsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = Group::findOrFail($id);
+        return $group->delete();
     }
 
     public function get_posts($group_id)

@@ -20,7 +20,7 @@ class CreateCommentsVkTable extends Migration
             $table->bigInteger('post_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('posts_vk')->onDelete('cascade');
             $table->string('text');
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->float('toxicity');
             $table->timestamps();
         });

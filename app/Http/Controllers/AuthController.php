@@ -18,14 +18,28 @@ class AuthController extends Controller
     //public $loginAfterSignUp = true;
 
 
+    public function testRequest(Request $request) {
+        $client = new GuzzleHttp\Client();
+        $res = $client->get('https://pokeapi.co/api/v2/pokemon/ditto');
+    }
+
     public function getJWT(Request  $request) {
         $pwd_token = $request['pwd_token'];
 
-        $client = new GuzzleHttp\Client();
         $host = Config::get('app.auth_host');
-        $res = $client->get(
-            $host . '/api/v1/user/current', [
-                'headers' => ['Authorization' => 'Bearer '.$pwd_token, 'Content-Type'=> 'application/json'],
+        $client = new GuzzleHttp\Client([
+            'base_uri' => $host,
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
+        $res = $client->request('GET',
+            '/api/v1/user/current', [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$pwd_token,
+                    'Content-Type'=> 'application/json',
+                    'Accept' => 'application/json'
+                ]
             ]);
 
 

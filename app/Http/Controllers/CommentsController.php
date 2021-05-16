@@ -40,7 +40,14 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->validate([
+            'post_id' => 'required|numeric',
+            'author_id' => 'required|numeric',
+            'author_type' => 'required|max:50',
+            'text' => 'required|max:255',
+            'toxicity' => 'required|numeric'
+        ]);
+        return Comment::create($storeData);
     }
 
     /**
@@ -74,7 +81,15 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'post_id' => 'required|numeric',
+            'author_id' => 'required|numeric',
+            'author_type' => 'required|max:50',
+            'text' => 'required|max:255',
+            'toxicity' => 'required|numeric'
+        ]);
+
+        return Comment::whereId($id)->update($data);;
     }
 
     /**
@@ -85,7 +100,8 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return $comment->delete();
     }
 
     public function get_comment($user_id, $post_id)

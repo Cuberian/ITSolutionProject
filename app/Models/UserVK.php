@@ -12,6 +12,11 @@ class UserVK extends Model
     use HasFactory;
     protected $table = 'users_vk';
     protected $guarded = [];
+<<<<<<< HEAD
+=======
+    //protected $fillable = ['wall_id', 'fullname', 'privacy', 'toxicity'];
+
+>>>>>>> master
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
