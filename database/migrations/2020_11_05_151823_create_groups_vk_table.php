@@ -17,9 +17,11 @@ class CreateGroupsVkTable extends Migration
             $table->id('id');
             $table->bigInteger('wall_id')->unsigned();
             $table->unique('wall_id');
-            $table->string('info');
+            $table->string('name');
+            $table->string('screen_name');
+            $table->longText('info');
             $table->string('avatar');
-            $table->boolean('privacy');
+            $table->boolean('is_closed');
             $table->float('toxicity');
             $table->timestamps();
         });

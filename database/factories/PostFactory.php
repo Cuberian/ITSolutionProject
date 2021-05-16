@@ -34,9 +34,7 @@ class PostFactory extends Factory
         return [
             'author_type' => $author_type,
             'author_id'=>$author->id,
-            'wall_id'=>$author->wall_id,
             'text' => $this->faker->text(200),
-            'picture' => $this->faker->imageUrl(400, 400),
             'toxicity' => $this->faker->randomFloat($nbMaxDecimals = 4, $min = 0, $max = 1)
         ];
     }

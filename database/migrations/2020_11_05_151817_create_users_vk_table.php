@@ -19,7 +19,7 @@ class CreateUsersVkTable extends Migration
             $table->unique('wall_id');
             $table->string('fullname');
             $table->string('avatar');
-            $table->boolean('privacy');
+            $table->boolean('is_closed');
             $table->float('toxicity');
             $table->timestamps();
         });

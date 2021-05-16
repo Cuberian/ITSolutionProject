@@ -23,9 +23,11 @@ class GroupFactory extends Factory
     {
         return [
             'wall_id' => $this->faker->unique()->randomNumber(),
+            'name' => $this->faker->name(),
+            'screen_name' => $this->faker->name(),
             'info' => $this->faker->text(),
             'avatar' => $this->faker->imageUrl(200,200),
-            'privacy' => $this->faker->boolean(),
+            'is_closed' => $this->faker->boolean(),
             'toxicity' => $this->faker->randomFloat($nbMaxDecimals=4, $min=0, $max=1)
         ];
     }

@@ -25,7 +25,7 @@ class UserVKFactory extends Factory
             'wall_id' => $this->faker->unique()->randomNumber(),
             'fullname' => $this->faker->name,
             'avatar' => $this->faker->imageUrl(200,200),
-            'privacy' => $this->faker->boolean,
+            'is_closed' => $this->faker->boolean,
             'toxicity' => $this->faker->randomFloat($nbMaxDecimals=4, $min=0, $max=1)
         ];
     }

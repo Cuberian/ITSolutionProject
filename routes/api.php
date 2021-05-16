@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\GroupsController;
@@ -29,4 +30,6 @@ Route::group(['prefix' => 'toxicity', 'middleware' => 'auth:api','as' => 'toxici
 
     Route::get('comments/{post_id}/{user_id}', [CommentsController::class, 'get_comment']);
     Route::get('answers/{comment_id}/{user_id}', [CommentsController::class, 'get_answer']);
+
+    Route::post('analysis/request', [AnalysisController::class, 'addToAnalysisQuery']);
 });

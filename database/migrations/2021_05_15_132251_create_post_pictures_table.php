@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsVkTable extends Migration
+class CreatePostPicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePostsVkTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts_vk', function (Blueprint $table) {
+        Schema::create('post_pictures', function (Blueprint $table) {
             $table->id();
-            $table->string('author_type');
-            $table->bigInteger('author_id');
-            $table->longText('text');
-            $table->float('toxicity');
+            $table->bigInteger('post_id')->unsigned();
+            $table->foreign('post_id')
+                ->references('id')
+                ->on('posts_vk')
+                ->onDelete('cascade');
+            $table->text('picture');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreatePostsVkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts_vk');
+        Schema::dropIfExists('post_pictures');
     }
 }
