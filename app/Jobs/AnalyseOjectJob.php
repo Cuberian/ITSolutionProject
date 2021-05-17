@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\AnalysisRequestObject;
 use App\Models\Group;
 use App\Models\Post;
 use App\Models\PostPicture;
@@ -41,6 +42,7 @@ class AnalyseOjectJob implements ShouldQueue
     }
 
     public function  setPosts($author_type, $author_id, $posts) {
+        $createdPosts = [];
         foreach ($posts as $post)
         {
             $postData = [
@@ -62,7 +64,10 @@ class AnalyseOjectJob implements ShouldQueue
                     }
                 }
             }
+            $createdPosts[] = $post;
         }
+
+        return $createdPosts;
     }
 
     /**
@@ -90,10 +95,15 @@ class AnalyseOjectJob implements ShouldQueue
                 $user = UserVK::updateOrCreate(['wall_id' => $res['user']['id']], $userData);
                 if($res['posts'] != null && count($res['posts']) > 0)
                     $this->setPosts('App\Models\UserVK', $user->id, $res['posts']);
+
+                AnalysisRequestObject::create([
+                    'request_id' => $this->req_id,
+                    'type' => 'user',
+                    'object_id' => $user->id
+                ]);
                 break;
             case 'group':
                 $groupData = [
-                    'wall_id' => $res['group']['id'],
                     'name' => $res['group']['name'],
                     'screen_name' => $res['group']['screen_name'],
                     'info' => $res['group']['description'],
@@ -102,8 +112,15 @@ class AnalyseOjectJob implements ShouldQueue
                     'toxicity' => $res['group']['toxicity']
                 ];
 
-                $group = Group::updateOrCreate($groupData);
-                $this->setPosts('App\Models\Group', $group->id, $res['posts']);
+                $group = Group::updateOrCreate(['wall_id' => $res['group']['id']], $groupData);
+                if($res['posts'] != null && count($res['posts']) > 0)
+                    $this->setPosts('App\Models\Group', $group->id, $res['posts']);
+
+                AnalysisRequestObject::create([
+                    'request_id' => $this->req_id,
+                    'type' => 'group',
+                    'object_id' => $group->id
+                ]);
                 break;
 
             case 'post':
@@ -116,7 +133,13 @@ class AnalyseOjectJob implements ShouldQueue
                 ];
                 $group= Group::updateOrCreate($ownerData);
 
-                $this->setPosts('App\Models\Group', $group->id, [$res['post']]);
+                $post = $this->setPosts('App\Models\Group', $group->id, [$res['post']])[0];
+
+                AnalysisRequestObject::create([
+                    'request_id' => $this->req_id,
+                    'type' => 'post',
+                    'object_id' => $post->id
+                ]);
                 break;
         }
     }

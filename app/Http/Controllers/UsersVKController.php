@@ -54,19 +54,13 @@ class UsersVKController extends Controller
      * Display the specified resource.
      *
      * @param $userVK_id
-     * @return \Psr\Http\Message\StreamInterface
-     * @throws GuzzleHttp\Exception\GuzzleException
      */
 
     public function show($userVK_id)
     {
-        try {
-            $userVK = new GuzzleHttp\Client();
-            $res = $userVK->request('GET', Config::get('app.python_host') . '/toxicity_py/api/users/' . $userVK_id);
-        } catch (ClientException $e) {
-            return  response()->json(['message'=> Psr7\MessWage::toString($e->getResponse())]);
-        }
-        return $res->getBody();
+        $user = UserVK::find($userVK_id);
+        return response()->json($user);
+
     }
 
     /**
@@ -113,14 +107,9 @@ class UsersVKController extends Controller
 
     public function get_posts($user_id)
     {
-        try {
-            $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/' . $user_id);
-        } catch (ClientException $e) {
-            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
-        }
-
-        return $res->getBody();
+        $user = UserVk::find($user_id);
+        $posts = $user->posts;
+        return response()->json($posts);
     }
     public function get_subscribers($user_id)
     {

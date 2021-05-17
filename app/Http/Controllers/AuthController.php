@@ -59,6 +59,10 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    public function checkJWT(Request $request) {
+        return response()->json(auth()->user());
+    }
+
     public function invalidateToken()
     {
         auth()->invalidate();

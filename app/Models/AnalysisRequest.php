@@ -13,8 +13,8 @@ class AnalysisRequest extends Model
     protected  $guarded = [];
     protected $appends = ['analysis_request_objects'];
 
-    public function getAnimalTraitsAttribute()
+    public function getAnalysisRequestObjectsAttribute()
     {
-        return $this->belongsTo(AnalysisRequestObject::class, 'request_id', 'id')->getResults();
+        return AnalysisRequestObject::all()->where('request_id', $this->id)->toArray();
     }
 }
