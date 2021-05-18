@@ -15,6 +15,6 @@ class AnalysisRequest extends Model
 
     public function getAnalysisRequestObjectsAttribute()
     {
-        return AnalysisRequestObject::all()->where('request_id', $this->id)->toArray();
+        return AnalysisRequestObject::all()->where('request_id', $this->id);
     }
 }

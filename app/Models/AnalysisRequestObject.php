@@ -11,4 +11,17 @@ class AnalysisRequestObject extends Model
 
     protected $table = 'analysis_request_objects';
     protected  $guarded = [];
+
+    public $objHelper = [
+        'group'=> Group::class,
+        'user'=> UserVK::class,
+        'post'=> Post::class
+    ];
+
+    protected $appends = ['object_value'];
+
+    public function getObjectValueAttribute()
+    {
+        return $this->objHelper[$this->type]::find($this->object_id);
+    }
 }
