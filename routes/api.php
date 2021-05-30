@@ -33,6 +33,7 @@ Route::group(['prefix' => 'toxicity', 'middleware' => 'auth:api','as' => 'toxici
     Route::resource('groups', GroupsController::class)->except(['edit']);
 
     Route::get('users_vk/{user_id}/posts', [UsersVKController::class, 'get_posts']);
+    Route::get('groups/{group_id}/posts', [GroupsController::class, 'get_posts']);
 
     Route::get('comments/{post_id}/{user_id}', [CommentsController::class, 'get_comment']);
     Route::get('answers/{comment_id}/{user_id}', [CommentsController::class, 'get_answer']);

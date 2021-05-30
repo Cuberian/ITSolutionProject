@@ -21,7 +21,10 @@ class CreateAnalysisRequestObjectsTable extends Migration
                 ->on('analysis_request')
                 ->onDelete('cascade');
             $table->string('type');
-            $table->bigInteger('object_id');
+            $table->bigInteger('object_id')->nullable();
+            $table->string('requested_id');
+            $table->enum('analysis_type',['error', 'success']);
+            $table->string('result_description');
             $table->timestamps();
         });
     }

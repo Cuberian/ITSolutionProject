@@ -111,6 +111,7 @@ class UsersVKController extends Controller
         $posts = $user->posts;
         return response()->json($posts);
     }
+
     public function get_subscribers($user_id)
     {
         try {

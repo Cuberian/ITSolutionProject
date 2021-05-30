@@ -113,15 +113,11 @@ class GroupsController extends Controller
 
     public function get_posts($group_id)
     {
-        try {
-            $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/' . $group_id);
-        } catch (ClientException $e) {
-            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
-        }
-
-        return $res->getBody();
+        $group = Group::find($group_id);
+        $posts = $group->posts;
+        return response()->json($posts);
     }
+
 
     public function get_members($group_id)
     {

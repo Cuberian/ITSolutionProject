@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\AnalyseOjectJob;
-use App\Jobs\AnalysisObjectsJob;
+use App\Jobs\AnalyseObjectJob;
+use App\Jobs\StartAnalyseJob;
 use App\Jobs\EndAnalyseJob;
 use App\Models\AnalysisRequest;
 use Illuminate\Http\Request;
@@ -24,10 +24,10 @@ class AnalysisController extends Controller
 
         foreach ($request['objectInputs'] as $key=>$value)
         {
-            $analyseJobs[] = new AnalyseOjectJob($request_obj->id, $value['objType'], $value['objId']);
+            $analyseJobs[] = new AnalyseObjectJob($request_obj->id, $value['objType'], $value['objId']);
         }
 
-        $firstJob = new AnalysisObjectsJob($request_obj->id);
+        $firstJob = new StartAnalyseJob($request_obj->id);
 
         $firstJob::withChain(array_merge($analyseJobs, [new EndAnalyseJob($request_obj->id)]))->dispatch($request_obj->id);
 
