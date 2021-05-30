@@ -47,7 +47,6 @@ class AnalyseObjectJob implements ShouldQueue
      * @param $description
      */
     public function setUser ($user, $posts, $description) {
-        print_r($user);
         if($user) {
             $userData = [
                 'fullname' => "{$user['last_name']} {$user['first_name']}",
@@ -55,7 +54,6 @@ class AnalyseObjectJob implements ShouldQueue
                 'is_closed' => !!$user['is_closed'],
                 'toxicity' => (float)$user['toxicity']
             ];
-            print_r($userData);
             $userVK = UserVK::updateOrCreate(['wall_id' => $user['id']], $userData);
             if ($posts != null && count($posts) > 0)
                 $this->setPosts('App\Models\UserVK', $userVK->id, $posts);
@@ -203,7 +201,6 @@ class AnalyseObjectJob implements ShouldQueue
             }
         }
         catch (\Exception $e) {
-            print_r(['message' => 'I`m here']);
         }
     }
 }
