@@ -13,6 +13,10 @@ class User extends Authenticatable implements JWTSubject
 
     // Rest omitted for brevity
 
+    public function savedRecords()
+    {
+        return SavedRecord::all()->where('user_id', $this->id);
+    }
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

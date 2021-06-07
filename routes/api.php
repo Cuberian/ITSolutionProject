@@ -32,6 +32,10 @@ Route::group(['prefix' => 'toxicity', 'middleware' => 'auth:api','as' => 'toxici
     Route::resource('users_vk', UsersVKController::class)->except(['edit']);
     Route::resource('groups', GroupsController::class)->except(['edit']);
 
+    Route::get('user/get-saved-records', [UsersController::class, 'getSavedRecords']);
+    Route::post('user/add-saved-record', [UsersController::class, 'addSavedRecord']);
+    Route::delete('user/del-saved-record/{record_id}', [UsersController::class, 'deleteSavedRecord']);
+
     Route::get('users_vk/{user_id}/posts', [UsersVKController::class, 'get_posts']);
     Route::get('groups/{group_id}/posts', [GroupsController::class, 'get_posts']);
 
