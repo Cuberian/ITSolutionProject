@@ -13,6 +13,15 @@ class UserVK extends Model
     protected $table = 'users_vk';
     protected $guarded = [];
 
+    protected $appends = ['is_saved'];
+
+    public function getIsSavedAttribute()
+    {
+        $user_id = auth()->user()->id;
+        $saved_record = SavedRecord::all()->where('object_type', 'user')->where('object_id', $this->id)->where('user_id', $user_id)->toArray();
+        return count($saved_record) > 0;
+    }
+
     public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Comment::class, 'author');

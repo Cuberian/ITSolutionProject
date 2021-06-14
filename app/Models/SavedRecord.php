@@ -17,10 +17,10 @@ class SavedRecord extends Model
         'post'=> Post::class
     ];
 
-    protected $appends = ['object_value'];
-
-    public function getObjectValueAttribute()
-    {
-        return $this->objHelper[$this->object_type]::find($this->object_id);
-    }
+//    protected $appends = ['object_value'];
+//
+//    public function getObjectValueAttribute()
+//    {
+//        return $this->objHelper[$this->object_type]::find($this->object_id);
+//    }
 }

@@ -58,14 +58,8 @@ class PostsController extends Controller
      */
     public function show($post_id)
     {
-        try {
-            $post = new GuzzleHttp\Client();
-            $res = $post->request('GET', Config::get('app.python_host') . '/toxicity_py/api/posts/post/' . $post_id);
-        } catch (ClientException $e) {
-            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
-        }
-
-        return $res->getBody();
+        $post = Post::find($post_id);
+        return response()->json($post);
     }
 
     /**

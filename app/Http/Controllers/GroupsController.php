@@ -59,14 +59,8 @@ class GroupsController extends Controller
      */
     public function show($group_id)
     {
-        try {
-            $group = new GuzzleHttp\Client();
-            $res = $group->request('GET', Config::get('app.python_host') . '/toxicity_py/api/groups/' . $group_id);
-        } catch (ClientException $e) {
-            return  response()->json(['message'=> Psr7\Message::toString($e->getResponse())]);
-        }
-
-        return $res->getBody();
+        $group = Group::find($group_id);
+        return response()->json($group);
     }
 
     /**

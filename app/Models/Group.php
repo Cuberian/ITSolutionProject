@@ -18,9 +18,8 @@ class Group extends Model
     public function getIsSavedAttribute()
     {
         $user_id = auth()->user()->id;
-        $saved_record = SavedRecord::all()->toArray();
-//            ->where('object_id', $this->id);
-        return $saved_record;
+        $saved_record = SavedRecord::all()->where('object_type', 'group')->where('object_id', $this->id)->where('user_id', $user_id)->toArray();
+        return count($saved_record) > 0;
     }
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
